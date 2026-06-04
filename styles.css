@@ -1,11 +1,4 @@
-   body { font-family: Arial, sans-serif; max-width: 1000px; margin: 40px auto; padding: 0 16px; background: #f7f7fb; }
-    h1, h2 { margin-bottom: 12px; }
-    .products, .cart { display: grid; gap: 16px; margin-bottom: 24px; }
-    .product, .cart-item { background: #fff; border: 1px solid #ddd; border-radius: 12px; padding: 16px; box-shadow: 0 4px 14px rgba(0,0,0,.05); }
-    .row { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
-    img { width: 90px; height: 90px; object-fit: contain; background: #fff; border-radius: 10px; }
-    button { cursor: pointer; padding: 10px 14px; border: 0; border-radius: 8px; background: #6c5ce7; color: white; font-weight: 700; }
-    button.secondary { background: #ff6b6b; }
-    button.gray { background: #666; }
-    .muted { color: #666; }
-    .summary { background: #fff; border: 1px solid #ddd; border-radius: 12px; padding: 16px; margin-top: 12px; }
+body { font-family: Arial, sans-serif; max-width: 900px; margin: 40px auto; padding: 20px; }
+    .product, .cart-item { border: 1px solid #ddd; border-radius: 8px; padding: 16px; margin-bottom: 12px; }
+    button { padding: 8px 12px; cursor: pointer; }
+    #cart:empty::before { content: ""; }
