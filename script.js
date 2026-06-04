@@ -6,7 +6,8 @@ const products = [
 ];
 
 function getCart() {
-  return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+  const data = localStorage.getItem(STORAGE_KEY);
+  return data ? JSON.parse(data) : [];
 }
 
 function saveCart(cart) {
@@ -16,7 +17,7 @@ function saveCart(cart) {
 function addToCart(id) {
   const cart = getCart();
   const product = products.find((p) => p.id === id);
-  const existing = cart.find((p) => p.id === id);
+  const existing = cart.find((item) => item.id === id);
 
   if (existing) {
     existing.qty += 1;
@@ -29,24 +30,20 @@ function addToCart(id) {
 }
 
 function removeFromCart(id) {
-  const cart = getCart().filter((p) => p.id !== id);
+  const cart = getCart().filter((item) => item.id !== id);
   saveCart(cart);
   renderCart();
 }
 
 function renderProducts() {
   const productsEl = document.getElementById("products");
-  productsEl.innerHTML = products
-    .map(
-      (product) => `
-      <div class="product">
-        <p>${product.title}</p>
-        <p>$${product.price}</p>
-        <button id="add-${product.id}" onclick="addToCart(${product.id})">Add to cart</button>
-      </div>
-    `
-    )
-    .join("");
+  productsEl.innerHTML = products.map((product) => `
+    <div class="product">
+      <p>${product.title}</p>
+      <p>$${product.price}</p>
+      <button id="add-${product.id}" onclick="addToCart(${product.id})">Add to Cart</button>
+    </div>
+  `).join("");
 }
 
 function renderCart() {
@@ -58,18 +55,14 @@ function renderCart() {
     return;
   }
 
-  cartEl.innerHTML = cart
-    .map(
-      (item) => `
-      <div class="cart-item" id="item">
-        <p>${item.title}</p>
-        <p>Price: $${item.price}</p>
-        <p>Qty: ${item.qty}</p>
-        <button id="remove-${item.id}" onclick="removeFromCart(${item.id})">Remove</button>
-      </div>
-    `
-    )
-    .join("");
+  cartEl.innerHTML = cart.map((item) => `
+    <div id="item">
+      <p>${item.title}</p>
+      <p>Price: $${item.price}</p>
+      <p>Qty: ${item.qty}</p>
+      <button id="remove-${item.id}" onclick="removeFromCart(${item.id})">Remove</button>
+    </div>
+  `).join("");
 }
 
 renderProducts();
